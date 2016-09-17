@@ -1,0 +1,14 @@
+body {
+	background-color: #AAA;
+}
+
+svg {
+	background-color: #000;
+	float: left;
+	margin: 20px
+}
+
+p {
+	float: left;
+	margin: 20px
+}

@@ -15,7 +15,7 @@ I decided to pick the first dataset of fractional anisotropy values of a brain s
 
 This is the simplest visualization technique applied to the dataset.The values are plotted on a grid and the size of a point is the FA value observed at that region in the brain.
 
-This visualization instantly depicts the density and structure of the brain tissue. There is clear defininiton showing the cerebrum and corpus callosum. 
+This visualization instantly depicts the density and structure of the brain tissue. There is clear defininiton showing the `cerebrum` and `corpus callosum`. 
 
 The legend shows a gradient of FA values ranging from 0 to 1. 
 

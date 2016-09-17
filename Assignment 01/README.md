@@ -1,4 +1,9 @@
 # Data-Visualization
+
+Foreward : The visualizations and explanations for this assignment are explained below. The sources have been attached for reference. The code has also been hosed on CodePen for easier and convenient viewability. Click on the links in this document to view the visualizations.
+
+
+
 ## Homework 01
 
 I decided to pick the first dataset of fractional anisotropy values of a brain scan. I found it interesting as this would allow for numeric as well as spatial charting.

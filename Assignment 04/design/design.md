@@ -24,4 +24,4 @@ Color buckets can be used to depict `Age_Groups` of each patient on the grid.
 
 A simple sketch is attached for a single patient to depict how a path might look like. The thick line in the sketch is a patient with it's tail. It is frozen at some point in the middle of `Days_From1stTBI` counter progression from low to high value. In actual solution this point will move along the trail it is following to show patient's disease with a sense of direction.
 
-Image: ![Alt](Data-Visualization/Assignment 04/design/scan.pdf)
+Image: ![Alt](https://github.com/sathley/Data-Visualization/blob/master/Assignment%2004/design/scan.pdf)

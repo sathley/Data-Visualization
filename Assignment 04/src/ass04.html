@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Assignment 04</title>
+
+    <!-- use the Plottable css -->
+    <link rel="stylesheet" type="text/css" href="https://rawgithub.com/palantir/plottable/develop/plottable.css" />
+
+    <!-- import D3 -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <!-- import Plottable-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plottable.js/2.2.0/plottable.min.js"></script>
+
+    <!-- load the script that draws the chart -->
+    <link rel="stylesheet" type="text/css" href="chart.css" />
+    <script src="chart.js"></script>
+
+
+  </head>
+  <body style="background-color: #1D1E19;">
+    <!-- Plottable will draw the chart in the svg tag. -->
+    <!-- You must specify the ID attribute so that Plottable knows where to draw. -->
+    <!-- The width and height attributes are optional; by default svg tags occupy their entire container. -->
+    <svg id="basicChart"  />
+  </body>
+
+  <!-- ensure that this script will not run until the window has loaded -->
+  <script> window.onload = makeChart; </script>
+</html>

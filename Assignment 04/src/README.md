@@ -17,9 +17,11 @@ Then for each patient we have several encounters before and after the TBI. Each 
 
 # Tasks Description
 
-Two primary tasks are evident. Firstly, how have the diseases progressed over time for the patients. Have they been cured of certain symptoms while other symptoms have surfaced and stayed for prolonged periods. We would like to compare and contrast this information for all patients.
+Two primary tasks are evident. 
 
-Secondly, the frequency of encounters themselves. Have the patients been more frequent with doctors visits. How has this frequency progressed over time.
+Firstly, how have the diseases progressed over time for the patients. Have they been cured of certain symptoms while other symptoms have surfaced and stayed for prolonged periods. We would like to compare and contrast this information for all patients.
+
+Secondly, the frequency of encounters themselves. Have the patients been more frequent with doctors' visits. How has this frequency progressed over time.
 
 
 # Mapping Tasks and data needs in encoding process
@@ -36,22 +38,23 @@ Each symptom has been encoded into a different color and luminescence has used t
 #### Does the design address *change* task; How would you modify the task to make it a *change* task if not?
 
 Yes. As the succesive encounters have been layed out next to each other and the encounters have also been aligned for a common TBI column, the approach depicts change tasks effectively. 
-Another approach could have been to encode different symptoms with textures instead of colors. The human eye is very good at identifying density of tiles.
+Another approach could have been to encode different symptoms with textures instead of colors. The human eye is very good at identifying density of patterns in tiles.
 
 #### How many items can the design show on a 24-inch monitor?
 
-As this is an overview design all data fits well into the screen.
+As this is an overview design all data fits well into the screen. Some scrolling is involved, but it does not reduce the efficacy of the design drastically.
+
 #### Does it use overview+detail technique?
 
-No. This design only depicts an overview of the change tasks. 
+No. This design only depicts an overview of the change tasks. A more comprehensive design might use interaction and detailed views, but we are successively able to visualize the change tasks without the need for detail representations.
 
 #### Does it show "temporal" changes?
 
-Yes. The successive changes in encounters for a patient oer time and also accross patients effectively shows temporal changes.
+Yes. The successive changes in encounters for a patient over time have been layed out in rows and accross patients over columns. This effectively shows temporal changes.
 
 #### Whether or not it introduces clutter by comparing with all other designs?
 
-No. As every encounter is given it's own real estate on the screen, there is no scope for everlaying visual components and hence cluter is at a minimum.
+No. As every encounter is given it's own real estate on the screen, there is no need for everlaying visual components and hence cluter is at a minimum.
 
 #### Is the design visually pleasing?
 

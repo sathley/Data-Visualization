@@ -1,59 +1,92 @@
 var data = [];
 var patientIds = [];
-var c20c = d3.scale.category20c();
+var symptomScale = new Plottable.Scales.Color("Category20c");
+symptomScale.domain(["Stress", "PTSD", "Speech", "Anxiety", "Depression", "Headache", "Sleep", "Audiology", "Vision", "Neurologic", "Alzheimer", "Cognitive", "PCS"]);
+function arrange(arr) {
+  var newOrder = [];
+  if(arr.length == 0)
+    return;
 
-var stressColorScale = new Plottable.Scales.InterpolatedColor("log");
-stressColorScale.range(["#B71C1C", "#FFCDD2"]);
+  var lastBeforeTBI = arr[arr.length - 1];
+  var lastBeforeTBIIndex = arr.length - 1;
+  
+  for(;lastBeforeTBIIndex >= 0; lastBeforeTBIIndex--) {
+    if(arr[lastBeforeTBIIndex].days_since_tbi < 0)
+      break;
+  }
+  lastBeforeTBI = arr[lastBeforeTBIIndex];
 
-var ptsdColorScale = new Plottable.Scales.InterpolatedColor("log");
-ptsdColorScale.range(["#880E4F", "#FCE4EC"]);
+  var jump = -1;
 
-var speechColorScale = new Plottable.Scales.InterpolatedColor("log");
-speechColorScale.range(["#4A148C", "#F3E5F5"]);
+  var j = lastBeforeTBIIndex;
+  for(jump = -1; jump > -200; jump--) {
+    if(typeof arr[j] === 'undefined') {
+      // does not exist
+      arr[j] = {
+        x: jump,
+        y: -1
 
-var anxietyColorScale = new Plottable.Scales.InterpolatedColor("log");
-anxietyColorScale.range(["#311B92", "#EDE7F6"]);
+      }
+    }
+    else {
+      // does exist
+      arr[j].x = jump;
+    }
+    j--;
+  }
+  
+  jump = 1;
+  for(var j = lastBeforeTBIIndex + 1; j < arr.length; j++) {
+    if(typeof arr[j] === 'undefined') {
+      // does not exist
 
-var scales = {
-  "1" : stressColorScale,
-  "2" : ptsdColorScale,
-  "3" : speechColorScale,
-  "4" : stressColorScale
+    }
+    else {
+      // does exist
+      arr[j].x = jump;
+      jump++;
+    }
+  }
+  return arr;
 }
 
 function loadData() {
   data = [];
+  var temp_row = [];
   var client = new XMLHttpRequest();
-  client.open('GET', 'https://gist.githubusercontent.com/sathley/3f2fc239b1f4ceb1461bf3921f0963ff/raw/ee9e3ead401534225df2a0fab186bb4f7e73b2e3/patient_data.csv', false);
+  client.open('GET', 'https://gist.githubusercontent.com/sathley/3f2fc239b1f4ceb1461bf3921f0963ff/raw/645b3b2e47dab886122f53f6aeae1f86f3b8159b/patient_data.csv', false);
   client.send(null);
   var lines = client.responseText.split('\n');
   var previousPatientId = -1;
-  var x = 0;
-  var y = 0;
-  var tbi = 200;
-
-
-
-  // calculate total and tbi for biggest patient
+  var x = -1;
+  var y = -1;
 
   for (var i = 1; i < lines.length; i++) {
     var line = lines[i].split(',');
     
     if (line[1] == previousPatientId) {
       x++;
-    } else {
+
+      temp_row.push({
+        x: -1,
+        y: y,
+        symptom: parseInt(line[3]),
+        id: line[1],
+        days_since_tbi: parseInt(line[2])
+      });
+
+    } 
+    else {
       y++;
       x = 0;
       previousPatientId = line[1];
       patientIds.push(line[1].toString());
+      
+      data = data.concat(arrange(temp_row));
+      
+      temp_row = [];
     }
-    data.push({
-      x: x,
-      y: y,
-      symptom: parseInt(line[3]),
-      id: line[1],
-      days_since_tbi: parseInt(line[2]) 
-    });
+     
   }
 }
 
@@ -62,40 +95,51 @@ function plotChart() {
   var yScale = new Plottable.Scales.Category();
   yScale.domain(patientIds);
 
-  
-
   var plot = new Plottable.Plots.Rectangle()
     .addDataset(new Plottable.Dataset(data))
     
     .x(function(d) {
-      return d.x;
+      if(typeof d != 'undefined') {
+        return d.x;
+      }
+      else {
+        return 0;
+      }
+        
     }, xScale)
-    //.x2(function(d) {
-    //  return d.x+1;
-    //}, xScale)
     
     .y(function(d) {
-      return d.id;
+      if(typeof d != 'undefined') {
+        return d.id;
+    }
     }, yScale)
-    //.y2(function(d) {
-    //  return d.y+1;
-    //}, yScale)
+
     .attr("fill", function(d) {
-      return scales[(d.symptom % 4) + 1].scale(Math.abs(d.days_since_tbi));
+      var domain = symptomScale.domain();
+      return symptomScale.scale(domain[d.symptom-1]);
     })
+
     .labelsEnabled(true)
     .label(function(d) {
       return d.id;
     });
 
-
     var yAxis = new Plottable.Axes.Category(yScale, "left");
-    //yAxis.content().addClass('axis-tick');
-    var table = new Plottable.Components.Table([
-      [yAxis, plot]
-    ]);
-    table.renderTo("svg#basicChart");
+    yAxis.annotationsEnabled(true);
+    //yAxis.addClass('axis-label');
 
+    var legend = new Plottable.Components.Legend(symptomScale);
+    legend.maxEntriesPerRow(7);
+    legend.xAlignment("center");
+    legend.yAlignment("center");
+    //legend.addClass('axis-label');
+
+    var table = new Plottable.Components.Table([
+      [yAxis, plot],
+      [null, legend]
+    ]);
+
+    table.renderTo("svg#basicChart");
 }
 
 function makeChart() {

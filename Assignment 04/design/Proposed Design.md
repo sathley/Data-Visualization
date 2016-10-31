@@ -1,4 +1,4 @@
-# Assignment 04 Design
+# Assignment 04 Proposed Design
 
 ## Group Members
 

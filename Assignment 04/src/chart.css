@@ -1,3 +1,4 @@
-.axis-tick {
-	fill: #FFFFF
+.axis-label {
+	color: #FFFFFF;
+	font-weight: bold;
 }

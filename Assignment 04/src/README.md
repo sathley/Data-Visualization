@@ -46,7 +46,7 @@ As this is an overview design all data fits well into the screen. Some scrolling
 
 #### Does it use overview+detail technique?
 
-No. This design only depicts an overview of the change tasks. A more comprehensive design might use interaction and detailed views, but we are successively able to visualize the change tasks without the need for detail representations.
+No. This design only depicts an overview of the change tasks. A more comprehensive design might use interaction and detailed views, but we are sucessfully able to visualize the change tasks without the need for further detail representations.
 
 #### Does it show "temporal" changes?
 
